@@ -157,4 +157,7 @@
       <Name>WW2Weekend</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\poster1.jpg" />
+  </ItemGroup>
 </Project>

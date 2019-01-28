@@ -13,5 +13,18 @@ namespace WW2Weekend
         {
             InitializeComponent();
         }
+
+        private void Map_Clicked(object sender, EventArgs e)
+        {
+
+        }
+        private void Events_Clicked(object sender, EventArgs e)
+        {
+
+        }
+        private void Donate_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }
