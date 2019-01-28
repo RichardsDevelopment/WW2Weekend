@@ -10,8 +10,7 @@ namespace WW2Weekend
         public App()
         {
             InitializeComponent();
-
-            MainPage = new MainPage();
+            MainPage = MainPage = new NavigationPage(new MainPage()); 
         }
 
         protected override void OnStart()
