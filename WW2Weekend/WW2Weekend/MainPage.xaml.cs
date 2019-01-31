@@ -14,13 +14,13 @@ namespace WW2Weekend
             InitializeComponent();
         }
 
-        private void Map_Clicked(object sender, EventArgs e)
+        private async void Map_Clicked(object sender, EventArgs e)
         {
-
+            await Navigation.PushAsync(new MapPage());
         }
-        private void Events_Clicked(object sender, EventArgs e)
+        private async void Events_Clicked(object sender, EventArgs e)
         {
-
+            await Navigation.PushAsync(new EventsPage());
         }
         private void Donate_Clicked(object sender, EventArgs e)
         {

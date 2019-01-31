@@ -3,24 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:WW2Weekend"
              x:Class="WW2Weekend.MainPage"
-             xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView">
+             NavigationPage.HasNavigationBar="false"
+             BackgroundImage="poster1.jpg">
     
 
-    <StackLayout Spacing="1">
+    <StackLayout VerticalOptions="End" Spacing="-3">
         <!-- Place new controls here -->
-        <StackLayout>
-            <Image Source="poster1.jpg" MinimumHeightRequest="500" Aspect="AspectFit"/>
-        </StackLayout>
-        <StackLayout Orientation="Horizontal" Spacing="1"
-            VerticalOptions="EndAndExpand"
-            HeightRequest="80">
+        <StackLayout Orientation="Horizontal" Spacing="-8"
+            HeightRequest="80"
+            Margin="-4">
             <Button Text="Map" 
-                FontSize="25"
+                FontSize="18"
                 Clicked="Map_Clicked" 
                 HorizontalOptions="FillAndExpand"
                 />
             <Button Text="Events"
-                FontSize="25"
+                FontSize="18"
                 Clicked="Events_Clicked"
                 HorizontalOptions="FillAndExpand"
                 />
@@ -29,7 +27,6 @@
             FontSize="25"
             Clicked="Donate_Clicked"
             HeightRequest="80"
-            VerticalOptions="End"
             BackgroundColor="Firebrick"
             />
     </StackLayout>

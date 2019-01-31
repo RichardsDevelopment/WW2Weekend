@@ -160,4 +160,10 @@
   <ItemGroup>
     <BundleResource Include="Resources\poster1.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\poster5.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\poster3.jpg" />
+  </ItemGroup>
 </Project>

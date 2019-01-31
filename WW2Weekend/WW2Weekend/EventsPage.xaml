@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WW2Weekend.EventsPage"
+             >
+    <ContentPage.Content>
+        <StackLayout>
+            <Button x:Name="intConButton" 
+                    Text="Internet Connection"
+                    BackgroundColor="Red" />
+            
+            <Button x:Name="monConButton" 
+                    Text="Mongo Connection"
+                    BackgroundColor="Red" />
+
+            <Label x:Name="docsLabel"
+                    Text="" />
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
