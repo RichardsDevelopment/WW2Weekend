@@ -3,19 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WW2Weekend.EventsPage"
              >
-    <ContentPage.Content>
-        <StackLayout>
-            <Button x:Name="intConButton" 
-                    Text="Internet Connection"
-                    BackgroundColor="Red" />
-            
-            <Button x:Name="monConButton" 
-                    Text="Mongo Connection"
-                    BackgroundColor="Red" />
-
-            <Label x:Name="docsLabel"
-                    Text="" />
-
-        </StackLayout>
-    </ContentPage.Content>
+    <ListView x:Name="EventsListView"
+              HasUnevenRows="True"
+              >
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="{Binding name}" />
+                        <Label Text="{Binding location}" />
+                        <Label Text="{Binding datetime}" />
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </ContentPage>

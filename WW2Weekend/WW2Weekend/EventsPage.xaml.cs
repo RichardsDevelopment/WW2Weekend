@@ -10,21 +10,21 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
-
-
+using WW2Weekend.Classes;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace WW2Weekend
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class EventsPage : ContentPage
-	{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class EventsPage : ContentPage
+    {
         private MongoClient client;
         private IMongoDatabase db;
         private IMongoCollection<Event> collection;
-        private Event batch;
+        private List<Event> batch;
 
+        /*
         public class Event
         {
             [BsonId]
@@ -38,22 +38,18 @@ namespace WW2Weekend
             [BsonElement("DateTime")]
             public DateTime datetime { get; set; }
         }
-
+        */
         public EventsPage ()
 		{
             InitializeComponent ();
 
-            MainAsync().Wait();
+            MainAsync();
         }
 
         private async Task MainAsync()
         {
-            //bool connection = await GetConnectStatus();
-
             if (await GetConnectStatus())
             {
-                //bool mongoPing = await tryServer();
-
                 if (await tryServer())
                 {
                     if (await connectToDb())
@@ -61,9 +57,7 @@ namespace WW2Weekend
                         await pullDocuments();
 
                         Console.WriteLine("Pulled documents...");
-                                            
-                        docsLabel.Text = "Name: "+ batch.name;
-                        Console.WriteLine();                      
+                        EventsListView.ItemsSource = batch;
                     }
                 }
             }
@@ -73,16 +67,7 @@ namespace WW2Weekend
             }
 
         }
-        /*
-        private async Task<bool> TestConnectionToInternet()
-        {
-            Task<bool> getStatus = GetConnectStatus();
-
-            bool result = await getStatus;
-
-            return result;
-        }
-        */
+       
         private async Task<bool> GetConnectStatus()
         {
 
@@ -95,8 +80,6 @@ namespace WW2Weekend
                     // Connection available
                     Console.WriteLine("Internet connection detected.");
                     result = true;
-
-                    intConButton.BackgroundColor = Color.Green;
                 }
                 else
                 {
@@ -112,19 +95,6 @@ namespace WW2Weekend
             return result;
         }
 
-        /*
-         *  CHECKING CONNECTION TO MONGODBSERVER 
-         
-        private async Task<bool> PingMongoCluster()
-        {
-            bool result = false;
-
-            Task<bool> getMongoStatus = tryServer();
-            result = await getMongoStatus;
-            
-            return result;
-        }
-        */
         private async Task<bool> tryServer()
         {
             bool response = false;
@@ -140,8 +110,6 @@ namespace WW2Weekend
                     // Database is connected.
                     Console.WriteLine("Mongo server is reachable.");
                     response = true;
-
-                    monConButton.BackgroundColor = Color.Green;
                 }
                 else
                 {
@@ -175,25 +143,10 @@ namespace WW2Weekend
 
         private async Task pullDocuments()
         {
-            /*
-            using (IAsyncCursor<BsonDocument> cursor = await collection.FindAsync(new BsonDocument()))
-            {
-                while (await cursor.MoveNextAsync())
-                {
-                    batch = cursor.Current;
-
-                    foreach (BsonDocument document in batch)
-                    {
-                        Console.WriteLine(document);
-                        Console.WriteLine();
-                    }
-                }
-            }
-            */
             Console.WriteLine("Pulling Documents...");
 
             var filter = new FilterDefinitionBuilder<Event>().Empty;
-            batch = collection.Find(FilterDefinition<Event>.Empty).Single();
+            batch = await collection.Find(FilterDefinition<Event>.Empty).ToListAsync<Event>();
 
             Console.WriteLine("Returning to main...");
 
