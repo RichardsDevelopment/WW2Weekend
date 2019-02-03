@@ -24,37 +24,21 @@ namespace WW2Weekend
         private IMongoCollection<Event> collection;
         private List<Event> batch;
 
-        /*
-        public class Event
-        {
-            [BsonId]
-            public ObjectId id { get; set; }
-            [BsonElement("Name")]
-            public string name { get; set; }
-            [BsonElement("Description")]
-            public string description { get; set; }
-            [BsonElement("Location")]
-            public string location { get; set; }
-            [BsonElement("DateTime")]
-            public DateTime datetime { get; set; }
-        }
-        */
         public EventsPage ()
 		{
             InitializeComponent ();
-
             MainAsync();
         }
 
-        private async Task MainAsync()
+        private void MainAsync()
         {
-            if (await GetConnectStatus())
+            if (GetConnectStatus())
             {
-                if (await tryServer())
+                if (TryServer())
                 {
-                    if (await connectToDb())
+                    if (ConnectToDb())
                     {
-                        await pullDocuments();
+                        PullDocuments();
 
                         Console.WriteLine("Pulled documents...");
                         EventsListView.ItemsSource = batch;
@@ -68,7 +52,7 @@ namespace WW2Weekend
 
         }
        
-        private async Task<bool> GetConnectStatus()
+        private bool GetConnectStatus()
         {
 
             bool result = false;
@@ -95,7 +79,7 @@ namespace WW2Weekend
             return result;
         }
 
-        private async Task<bool> tryServer()
+        private bool TryServer()
         {
             bool response = false;
 
@@ -103,7 +87,7 @@ namespace WW2Weekend
             {
                 client = new MongoClient("mongodb://dbUser:LJ9UaQsS4ZxDYSG@cluster0-shard-00-00-lnyfj.mongodb.net:27017,cluster0-shard-00-01-lnyfj.mongodb.net:27017,cluster0-shard-00-02-lnyfj.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true");
                 var databases = client.ListDatabasesAsync().Result;
-                await databases.MoveNextAsync(); // Force MongoDB to connect to the database.
+                databases.MoveNextAsync().Wait(); // Force MongoDB to connect to the database.
 
                 if (client.Cluster.Description.State == ClusterState.Connected)
                 {
@@ -124,7 +108,7 @@ namespace WW2Weekend
             return response;
         }
 
-        private async Task<bool> connectToDb()
+        private bool ConnectToDb()
         {
             Console.WriteLine("Connecting to Database...");
             db = client.GetDatabase("MWM");
@@ -141,17 +125,20 @@ namespace WW2Weekend
             return status;
         }
 
-        private async Task pullDocuments()
+        private void PullDocuments()
         {
             Console.WriteLine("Pulling Documents...");
 
             var filter = new FilterDefinitionBuilder<Event>().Empty;
-            batch = await collection.Find(FilterDefinition<Event>.Empty).ToListAsync<Event>();
+            batch = collection.Find(FilterDefinition<Event>.Empty).ToList<Event>();
+
 
             Console.WriteLine("Returning to main...");
 
             return;
         }
+
+        
 
     }
 }

@@ -9,10 +9,12 @@
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="{Binding name}" />
-                        <Label Text="{Binding location}" />
-                        <Label Text="{Binding datetime}" />
+                    <StackLayout Orientation="Horizontal" >
+                        <Label Text="{Binding Name}" FontSize="Small"/>
+                        <BoxView WidthRequest="1" Color="Gray"/>
+                        <Label Text="{Binding Location}" FontSize="Small"/>
+                        <BoxView WidthRequest="1" Color="Gray"/>
+                        <Label Text="{Binding Datetime}" FontSize="Small"/>
                     </StackLayout>
                 </ViewCell>
             </DataTemplate>
