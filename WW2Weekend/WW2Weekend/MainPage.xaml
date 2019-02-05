@@ -16,11 +16,13 @@
                 FontSize="18"
                 Clicked="Map_Clicked" 
                 HorizontalOptions="FillAndExpand"
+                AutomationId="MainMapButton"    
                 />
             <Button Text="Events"
                 FontSize="18"
                 Clicked="Events_Clicked"
                 HorizontalOptions="FillAndExpand"
+                AutomationId="MainEventsButton"    
                 />
         </StackLayout>
         <Button Text="Donate"
@@ -28,6 +30,7 @@
             Clicked="Donate_Clicked"
             HeightRequest="80"
             BackgroundColor="Firebrick"
+            AutomationId="MainDonateButton"
             />
     </StackLayout>
 

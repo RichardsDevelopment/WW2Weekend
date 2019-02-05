@@ -6,7 +6,7 @@ using System.Text;
 
 namespace WW2Weekend.Classes
 {
-    class Event
+    public class Event
     {
         [BsonId]
         public ObjectId Id { get; set; }

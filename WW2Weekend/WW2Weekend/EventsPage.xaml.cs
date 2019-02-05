@@ -52,7 +52,7 @@ namespace WW2Weekend
 
         }
        
-        private bool GetConnectStatus()
+        public bool GetConnectStatus()
         {
 
             bool result = false;
@@ -79,7 +79,7 @@ namespace WW2Weekend
             return result;
         }
 
-        private bool TryServer()
+        public bool TryServer()
         {
             bool response = false;
 
@@ -137,8 +137,5 @@ namespace WW2Weekend
 
             return;
         }
-
-        
-
     }
 }
